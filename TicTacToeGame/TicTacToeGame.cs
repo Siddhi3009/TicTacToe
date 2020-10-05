@@ -18,8 +18,10 @@ namespace TicTacToeGame
                 board[position] = ' ';
             }
         }
-        public char Choice(char userSign)
+        public char Choice()
         {
+            Console.WriteLine("Enter your choice. \nX \n0");
+            char userSign = Convert.ToChar(Console.ReadLine());
             string choice;
             switch (userSign)
             {
@@ -60,20 +62,20 @@ namespace TicTacToeGame
                 return false;
             }
         }
-        public void PlayerMovement()
+        public void PlayerMovement(char choice)
         {
             Console.WriteLine("Select the position you want to play on");
             int userChoice = int.Parse(Console.ReadLine());
             bool emptyPosition = PositionCheck(userChoice);
             if (emptyPosition == true)
             {
-                board[userChoice] = Choice();
+                board[userChoice] = choice;
                 ShowBoard();
             }
             else 
             {
                 Console.WriteLine("Try Again");
-                PlayerMovement();
+                PlayerMovement(choice);
             }
         }
     }
