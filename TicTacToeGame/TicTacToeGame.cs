@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace TicTacToeGame
@@ -76,6 +77,21 @@ namespace TicTacToeGame
             {
                 Console.WriteLine("Try Again");
                 PlayerMovement(choice);
+            }
+        }
+        public void ComputerMovement(char compChoice)
+        {
+            Random random = new Random();
+            int computerChoice = random.Next(1, 10);
+            bool emptyPosition = PositionCheck(computerChoice);
+            if (emptyPosition == true)
+            {
+                board[computerChoice] = compChoice;
+                ShowBoard();
+            }
+            else
+            {
+                ComputerMovement(compChoice);
             }
         }
     }

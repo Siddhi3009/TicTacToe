@@ -9,9 +9,15 @@ namespace TicTacToeGame
             Console.WriteLine("Welcome to Tic Tac Toe Game");
             TicTacToeGame game = new TicTacToeGame();
             game.CreateBoard();
-            char choice = game.Choice();
+            char userChoice = game.Choice();
+            char compChoice;
+            if (userChoice == 'X')
+                compChoice = '0';
+            else
+                compChoice = 'X';
             game.ShowBoard();
-            game.PlayerMovement(choice);
+            game.PlayerMovement(userChoice);
+            game.ComputerMovement(compChoice);
         }
     }
 }
