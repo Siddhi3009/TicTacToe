@@ -9,8 +9,7 @@ namespace TicTacToeGame
             Console.WriteLine("Welcome to Tic Tac Toe Game");
             TicTacToeGame game = new TicTacToeGame();
             game.CreateBoard();
-            string choice = game.Choice();
-            Console.WriteLine(choice);
+            game.Choice();
         }
     }
 }
