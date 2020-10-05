@@ -21,13 +21,13 @@ namespace TicTacToeGame
         }
         public string Choice()
         {
-            Console.WriteLine("Enter your choice. \n1. X \n2. 0");
-            int choice = int.Parse(Console.ReadLine());
-            switch (choice)
+            Console.WriteLine("Enter your choice. \nX \n0");
+            string userChoice = Console.ReadLine();
+            switch (userChoice)
             {
-                case 1:
+                case "X":
                     return "You Chose: X";
-                case 2:
+                case "0":
                     return "You Chose: 0";
                 default:
                     return "Invalid Choice";
