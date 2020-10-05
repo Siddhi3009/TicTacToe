@@ -80,6 +80,21 @@ namespace TicTacToeGame
                 PlayerMovement(choice);
             }
         }
+        public void ComputerMovement(char compChoice)
+        {
+            Random random = new Random();
+            int computerChoice = random.Next(1, 10);
+            bool emptyPosition = PositionCheck(computerChoice);
+            if (emptyPosition == true)
+            {
+                board[computerChoice] = compChoice;
+                ShowBoard();
+            }
+            else
+            {
+                ComputerMovement(compChoice);
+            }
+        }
         public Player Toss()
         {
             Random random = new Random();
@@ -93,6 +108,88 @@ namespace TicTacToeGame
             {
                 Console.WriteLine("Computer will begin");
                 return Player.COMPUTER;
+            }
+        }
+        public void Play(char userChoice, char compChoice)
+        {
+            Player player = Toss();
+            int win = 0;
+            while (win == 0)
+            {
+                if (player.Equals(Player.USER))
+                {
+                    PlayerMovement(userChoice);
+                    player = Player.COMPUTER;
+                }
+                else
+                {
+                    ComputerMovement(compChoice);
+                    player = Player.USER;
+                }
+                win = CheckWin();
+                if (win == 1)
+                {
+                    if (player == Player.USER)
+                    {
+                        Console.WriteLine("Computer won");
+                        break;
+                    }
+                    if (player == Player.COMPUTER)
+                    {
+                        Console.WriteLine("User won");
+                        break;
+                    }
+                }
+                else if (win == -1)
+                {
+                    Console.WriteLine("Game draw");
+                    break;
+                }
+                else
+                    continue;
+            }
+        }
+        public int CheckWin()
+        {
+            if (board[1] == board[2] && board[2] == board[3] && board[3] != ' ')
+            {
+                return 1;
+            }
+            else if (board[4] == board[5] && board[5] == board[6] && board[6] != ' ')
+            {
+                return 1;
+            }
+            else if (board[6] == board[7] && board[7] == board[8] && board[8] != ' ')
+            {
+                return 1;
+            }
+            else if (board[1] == board[4] && board[4] == board[7] && board[7] != ' ')
+            {
+                return 1;
+            }
+            else if (board[2] == board[5] && board[5] == board[8] && board[8] != ' ')
+            {
+                return 1;
+            }
+            else if (board[3] == board[6] && board[6] == board[9] && board[9] != ' ')
+            {
+                return 1;
+            }
+            else if (board[1] == board[5] && board[5] == board[9] && board[9] != ' ')
+            {
+                return 1;
+            }
+            else if (board[3] == board[5] && board[5] == board[7] && board[7] != ' ')
+            {
+                return 1;
+            }
+            else if (board[1] != ' ' && board[2] != ' ' && board[3] != ' ' && board[4] != ' ' && board[5] != ' ' && board[6] != ' ' && board[7] != ' ' && board[8] != ' ' && board[9] != ' ')
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
             }
         }
     }
