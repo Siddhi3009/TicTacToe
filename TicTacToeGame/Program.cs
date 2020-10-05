@@ -10,9 +10,13 @@ namespace TicTacToeGame
             TicTacToeGame game = new TicTacToeGame();
             game.CreateBoard();
             char userChoice = game.Choice();
+            char compChoice;
+            if (userChoice == 'X')
+                compChoice = '0';
+            else
+                compChoice = 'X';
             game.ShowBoard();
-            game.PlayerMovement(userChoice);
-            game.Toss();
+            game.Play(userChoice, compChoice);
         }
     }
 }
