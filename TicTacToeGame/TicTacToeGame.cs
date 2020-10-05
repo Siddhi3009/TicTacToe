@@ -42,14 +42,15 @@ namespace TicTacToeGame
         }
         public void ShowBoard()
         {
+            TicTacToeGame game = new TicTacToeGame();
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  1  |  2  |  3");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", game.board[1], game.board[2], game.board[3]);
             Console.WriteLine("_____|_____|_____ ");
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  4  |  5  |  6");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", game.board[4], game.board[5], game.board[6]);
             Console.WriteLine("_____|_____|_____ ");
             Console.WriteLine("     |     |      ");
-            Console.WriteLine("  7  |  8  |  9");
+            Console.WriteLine("  {0}  |  {1}  |  {2}", game.board[7], game.board[8], game.board[9]);
             Console.WriteLine("     |     |      ");
         }
     }
