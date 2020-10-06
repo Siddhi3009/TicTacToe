@@ -80,27 +80,36 @@ namespace TicTacToeGame
                 PlayerMovement(choice);
             }
         }
-        public void ComputerMovement(char compChoice)
+        public void ComputerMovement(char compChoice, char userChoice)
         {
-            int winMove = WinningMove(compChoice);
-            if (winMove == 0)
+            int compWinMove = WinningMove(compChoice);
+            if (compWinMove == 0)
             {
-                Random random = new Random();
-                int computerChoice = random.Next(1, 10);
-                bool emptyPosition = PositionCheck(computerChoice);
-                if (emptyPosition == true)
+                int userWinMove = WinningMove(userChoice);
+                if (userWinMove == 0)
                 {
-                    board[computerChoice] = compChoice;
-                    ShowBoard();
+                    Random random = new Random();
+                    int computerChoice = random.Next(1, 10);
+                    bool emptyPosition = PositionCheck(computerChoice);
+                    if (emptyPosition == true)
+                    {
+                        board[computerChoice] = compChoice;
+                        ShowBoard();
+                    }
+                    else
+                    {
+                        ComputerMovement(compChoice, userChoice);
+                    }
                 }
-                else
+                else 
                 {
-                    ComputerMovement(compChoice);
+                    board[userWinMove] = compChoice;
+                    ShowBoard();
                 }
             }
             else 
             {
-                board[winMove] = compChoice;
+                board[compWinMove] = compChoice;
                 ShowBoard();
             }
         }
@@ -158,7 +167,7 @@ namespace TicTacToeGame
                 }
                 else
                 {
-                    ComputerMovement(compChoice);
+                    ComputerMovement(compChoice, userChoice);
                     player = Player.USER;
                 }
                 win = CheckWin();
