@@ -82,18 +82,53 @@ namespace TicTacToeGame
         }
         public void ComputerMovement(char compChoice)
         {
-            Random random = new Random();
-            int computerChoice = random.Next(1, 10);
-            bool emptyPosition = PositionCheck(computerChoice);
-            if (emptyPosition == true)
+            int winMove = WinningMove(compChoice);
+            if (winMove == 0)
             {
-                board[computerChoice] = compChoice;
+                Random random = new Random();
+                int computerChoice = random.Next(1, 10);
+                bool emptyPosition = PositionCheck(computerChoice);
+                if (emptyPosition == true)
+                {
+                    board[computerChoice] = compChoice;
+                    ShowBoard();
+                }
+                else
+                {
+                    ComputerMovement(compChoice);
+                }
+            }
+            else 
+            {
+                board[winMove] = compChoice;
                 ShowBoard();
             }
-            else
+        }
+        public int WinningMove(char compChoice)
+        {
+            int winningIndex = 0;
+            for (int i = 1; i < 10; i++)
             {
-                ComputerMovement(compChoice);
+                if (PositionCheck(i) == true)
+                {
+                    board[i] = compChoice;
+                    if (CheckWin() == 1)
+                    {
+                        board[i] = ' ';
+                        winningIndex = i;
+                        break;
+                    }
+                    else
+                    {
+                        board[i] = ' ';
+                        winningIndex = 0;
+                        continue;
+                    }
+                }
+                else
+                    continue;
             }
+            return winningIndex;
         }
         public Player Toss()
         {
