@@ -90,17 +90,25 @@ namespace TicTacToeGame
                 {
                     if (CornerMove() == 0)
                     {
-                        Random random = new Random();
-                        int computerChoice = random.Next(1, 10);
-                        bool emptyPosition = PositionCheck(computerChoice);
-                        if (emptyPosition == true)
+                        if (PositionCheck(5) == false)
                         {
-                            board[computerChoice] = compChoice;
-                            ShowBoard();
+                            Random random = new Random();
+                            int computerChoice = random.Next(1, 10);
+                            bool emptyPosition = PositionCheck(computerChoice);
+                            if (emptyPosition == true)
+                            {
+                                board[computerChoice] = compChoice;
+                                ShowBoard();
+                            }
+                            else
+                            {
+                                ComputerMovement(compChoice, userChoice);
+                            }
                         }
                         else
                         {
-                            ComputerMovement(compChoice, userChoice);
+                            board[5] = compChoice;
+                            ShowBoard();
                         }
                     }
                     else
@@ -121,14 +129,14 @@ namespace TicTacToeGame
                 ShowBoard();
             }
         }
-        public int WinningMove(char compChoice)
+        public int WinningMove(char choice)
         {
             int winningIndex = 0;
             for (int i = 1; i < 10; i++)
             {
                 if (PositionCheck(i) == true)
                 {
-                    board[i] = compChoice;
+                    board[i] = choice;
                     if (CheckWin() == 1)
                     {
                         board[i] = ' ';
