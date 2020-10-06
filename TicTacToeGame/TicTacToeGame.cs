@@ -93,7 +93,9 @@ namespace TicTacToeGame
                         if (PositionCheck(5) == false)
                         {
                             Random random = new Random();
-                            int computerChoice = random.Next(1, 10);
+                            int[] middleIndices = { 2, 4, 6, 8 };
+                            int index = random.Next(middleIndices.Length);
+                            int computerChoice = middleIndices[index];
                             bool emptyPosition = PositionCheck(computerChoice);
                             if (emptyPosition == true)
                             {
