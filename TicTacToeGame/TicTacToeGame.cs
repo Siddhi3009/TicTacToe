@@ -88,17 +88,25 @@ namespace TicTacToeGame
                 int userWinMove = WinningMove(userChoice);
                 if (userWinMove == 0)
                 {
-                    Random random = new Random();
-                    int computerChoice = random.Next(1, 10);
-                    bool emptyPosition = PositionCheck(computerChoice);
-                    if (emptyPosition == true)
+                    if (CornerMove() == 0)
                     {
-                        board[computerChoice] = compChoice;
-                        ShowBoard();
+                        Random random = new Random();
+                        int computerChoice = random.Next(1, 10);
+                        bool emptyPosition = PositionCheck(computerChoice);
+                        if (emptyPosition == true)
+                        {
+                            board[computerChoice] = compChoice;
+                            ShowBoard();
+                        }
+                        else
+                        {
+                            ComputerMovement(compChoice, userChoice);
+                        }
                     }
                     else
                     {
-                        ComputerMovement(compChoice, userChoice);
+                        board[CornerMove()] = compChoice;
+                        ShowBoard();
                     }
                 }
                 else 
@@ -235,6 +243,22 @@ namespace TicTacToeGame
             {
                 return 0;
             }
+        }
+        public int CornerMove()
+        {
+            int[] corners = { 1, 3, 7, 9 };
+            int freeCorner = 0;
+            foreach (int i in corners)
+            {
+                if (PositionCheck(i) == true)
+                {
+                    freeCorner = i;
+                    break;
+                }
+                else
+                    continue;
+            }
+            return freeCorner;
         }
     }
 }
